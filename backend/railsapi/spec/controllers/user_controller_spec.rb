@@ -1,4 +1,4 @@
-require 'rails_helper'
+require "rails_helper"
 
 RSpec.describe UserController, type: :request do
 
@@ -16,7 +16,7 @@ RSpec.describe UserController, type: :request do
     end
 
     it "Failure: Invalid Json.Web.Token" do
-      get "/user/", headers: {"Authorization" => "Bearer " + "foo.bar.baz"}
+      get "/user/", headers: {"Authorization" => "Bearer " + "hoge.hoge.hoge"}
       expect(response).to have_http_status(:unauthorized)
       expect(JSON.parse(response.body)).to eq({"msg" => "Expired or invalid Json.Web.Token"})
     end
@@ -89,6 +89,12 @@ RSpec.describe UserController, type: :request do
         expect(response).to have_http_status(:bad_request)
         expect(JSON.parse(response.body)).to eq({"msg" => "Current name incorrect"})
       end     
+    end
+
+    it "Failure: Param incorrect" do
+      put "/user/", params: {param: "hoge", current_val: test_user.name, new_val: "Jiro"}, headers: test_auth_header
+      expect(response).to have_http_status(:bad_request)
+      expect(JSON.parse(response.body)).to eq({"msg" => "Param incorrect"})
     end
   end
 

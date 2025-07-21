@@ -6,6 +6,7 @@ RSpec.describe JwtController, type: :request do
     it "Success" do
       post "/jwt/", params: {email: test_user.email, password: test_password}
       expect(response).to have_http_status(:ok)
+      expect(JSON.parse(response.body)["msg"]).to eq("Success")
       access_token = JSON.parse(response.body)["access_token"]
       expect(access_token).to be_present
       id = JWT.decode(access_token, ApplicationConcern::SECRET_KEY, true, {algorithm: "HS256"})[0]["sub"]

@@ -37,7 +37,7 @@ module ApplicationConcern extend ActiveSupport::Concern
   def authenticate(email, password)
     user = User.find_by(email: email)
     if user && Digest::SHA256.hexdigest(password) == user.pass_enc
-      return {access_token: create_access_token(user.id)}, 200
+      return {msg: "Success", access_token: create_access_token(user.id)}, 200
     else
       return {msg: "Email or password incorrect"}, 401
     end

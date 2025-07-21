@@ -19,8 +19,10 @@ class UserController < ApplicationController
       json, status = update_email(current_val, new_val)   
     elsif param == "password"
       json, status = update_password(current_val, new_val)  
-    else
+    elsif param == "name"
       json, status = update_name(current_val, new_val)
+    else
+      json, status = {msg: "Param incorrect"}, 400
     end
     return render json: json, status: status
   end
