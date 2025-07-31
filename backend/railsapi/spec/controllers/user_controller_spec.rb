@@ -12,7 +12,7 @@ RSpec.describe UserController, type: :request do
     it "Failure: Invalid header" do
       get "/user/"
       expect(response).to have_http_status(:unauthorized)
-      expect(JSON.parse(response.body)).to eq({"msg" => "'Authorzation: Bearer Json.Web.Token' not in header"})
+      expect(JSON.parse(response.body)).to eq({"msg" => "'Authorization: Bearer Json.Web.Token' not in header"})
     end
 
     it "Failure: Invalid Json.Web.Token" do
@@ -22,7 +22,7 @@ RSpec.describe UserController, type: :request do
     end
 
     it "Failure: Invalid User ID" do
-      get "/user/", headers: {"Authorization" => "Bearer " + create_access_token(0)}
+      get "/user/", headers: {"Authorization" => "Bearer " + controller.create_access_token(0)}
       expect(response).to have_http_status(:unauthorized)
       expect(JSON.parse(response.body)).to eq({"msg" => "User not found from Json.Web.Token"})
     end

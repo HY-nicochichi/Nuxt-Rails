@@ -1,3 +1,10 @@
+GIT
+  remote: https://github.com/HY-nicochichi/rails-jwt-lite.git
+  revision: a981f55c3493dde5c2e172839181021814c8c8b4
+  specs:
+    rails-jwt-lite (1.0.1)
+      jwt
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -222,12 +229,12 @@ PLATFORMS
 DEPENDENCIES
   bootsnap
   debug
-  jwt
   ostruct
   pg (~> 1.1)
   puma (>= 5.0)
   rack-cors
   rails (~> 8.0.2)
+  rails-jwt-lite!
   rspec-rails
   rswag-ui
   tzinfo-data

@@ -9,7 +9,7 @@ RSpec.describe JwtController, type: :request do
       expect(JSON.parse(response.body)["msg"]).to eq("Success")
       access_token = JSON.parse(response.body)["access_token"]
       expect(access_token).to be_present
-      id = JWT.decode(access_token, ApplicationConcern::SECRET_KEY, true, {algorithm: "HS256"})[0]["sub"]
+      id = controller.user_id_in_token(access_token)
       expect(id).to eq(test_user.id)
     end
 

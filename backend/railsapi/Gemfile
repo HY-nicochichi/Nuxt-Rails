@@ -33,8 +33,8 @@ gem "bootsnap", require: false
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin Ajax possible
 gem "rack-cors"
 
-# Use Json Web Token
-gem "jwt"
+# Use Original Gem for JWT Authentication
+gem "rails-jwt-lite", git: "https://github.com/HY-nicochichi/rails-jwt-lite.git"
 
 # Use Swagger UI
 gem "rswag-ui"

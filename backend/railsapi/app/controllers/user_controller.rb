@@ -1,9 +1,9 @@
 class UserController < ApplicationController
 
-  before_action :current_user, except: [:post]
+  before_action :jwt_protect, except: [:post]
 
   def get
-    return render json: {email: @user.email, name: @user.name}, status: 200
+    return render json: {email: @current_user.email, name: @current_user.name}, status: 200
   end
 
   def post
@@ -28,7 +28,7 @@ class UserController < ApplicationController
   end
 
   def delete
-    @user.destroy
+    @current_user.destroy
     json, status = SUCCESS_RESULT
     return render json: json, status: status
   end

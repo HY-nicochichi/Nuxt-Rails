@@ -1,10 +1,12 @@
 require "active_support/concern"
 
 module TestConcern extend ActiveSupport::Concern
-
-  include ApplicationConcern
-  
+ 
   included do
+    let!(:controller) {
+      return ApplicationController.new
+    }
+
     let!(:test_password) {
       return "Taro123"
     }
@@ -18,7 +20,7 @@ module TestConcern extend ActiveSupport::Concern
     }
 
     let!(:test_auth_header) {
-      return {"Authorization" => "Bearer " + create_access_token(test_user.id)}
+      return {"Authorization" => "Bearer " + controller.create_access_token(test_user.id)}
     }
   end
 
