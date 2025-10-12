@@ -1,4 +1,4 @@
-FROM ruby:3.4.4-slim
+FROM ruby:3.4.7-slim
 
 RUN apt update -qq && \ 
 apt install -y build-essential libpq-dev libyaml-dev git

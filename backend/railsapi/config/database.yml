@@ -3,8 +3,8 @@ default: &default
   encoding: unicode
   host: database
   port: 5432
-  username: postgres
-  password: password
+  username: <%= ENV["DATABASE_USER"] %>
+  password: <%= ENV["DATABASE_PASSWORD"] %>
   pool: 5
 
 development:

@@ -13,6 +13,11 @@ RSpec.describe JwtController, type: :request do
       expect(id).to eq(test_user.id)
     end
 
+    it "Failure: Params validation failed" do
+      post "/jwt/", params: {email: "invalid_email", password: "invalid_password"}
+      expect(response).to have_http_status(:unprocessable_content)
+    end
+
     it "Failure: Email incorrect" do
       post "/jwt/", params: {email: "jiro@email.com", password: test_password}
       expect(response).to have_http_status(:unauthorized)
