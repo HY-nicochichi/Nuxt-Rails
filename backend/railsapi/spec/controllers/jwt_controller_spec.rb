@@ -20,7 +20,7 @@ RSpec.describe JwtController, type: :request do
     end
 
     it "Failure: Password incorrect" do
-      post "/jwt/", params: {email: test_user.email, password: "Jiro123"}
+      post "/jwt/", params: {email: test_user.email, password: "Jiro1234"}
       expect(response).to have_http_status(:unauthorized)
       expect(JSON.parse(response.body)).to eq({"msg" => "Email or password incorrect"})
     end

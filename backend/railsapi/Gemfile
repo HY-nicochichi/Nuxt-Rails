@@ -36,6 +36,9 @@ gem "rack-cors"
 # Use Original Gem for JWT Authentication
 gem "rails-jwt-lite", git: "https://github.com/HY-nicochichi/rails-jwt-lite.git"
 
+# Use Original Gem for Schema Based Validation
+gem "rails-dry-validation", git: "https://github.com/HY-nicochichi/rails-dry-validation.git"
+
 # Use Swagger UI
 gem "rswag-ui"
 

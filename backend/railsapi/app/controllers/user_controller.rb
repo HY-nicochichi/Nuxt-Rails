@@ -1,5 +1,4 @@
 class UserController < ApplicationController
-
   before_action :jwt_protect, except: [:post]
 
   def get
@@ -32,5 +31,4 @@ class UserController < ApplicationController
     json, status = SUCCESS_RESULT
     return render json: json, status: status
   end
-
 end

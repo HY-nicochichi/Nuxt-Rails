@@ -8,7 +8,7 @@ module TestConcern extend ActiveSupport::Concern
     }
 
     let!(:test_password) {
-      return "Taro123"
+      return "Taro1234"
     }
 
     let!(:test_user) {

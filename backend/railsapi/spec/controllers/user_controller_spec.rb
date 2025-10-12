@@ -30,13 +30,13 @@ RSpec.describe UserController, type: :request do
 
   describe "POST #post" do
     it "Success" do
-      post "/user/", params: {email: "jiro@email.com", password: "Jiro123", name: "Jiro"}
+      post "/user/", params: {email: "jiro@email.com", password: "Jiro1234", name: "Jiro"}
       expect(response).to have_http_status(:ok)
       expect(JSON.parse(response.body)).to eq({"msg" => "Success"})
     end
 
     it "Failure: Email conflict" do
-      post "/user/", params: {email: test_user.email, password: "Jiro123", name: "Jiro"}
+      post "/user/", params: {email: test_user.email, password: "Jiro1234", name: "Jiro"}
       expect(response).to have_http_status(:conflict)
       expect(JSON.parse(response.body)).to eq({"msg" => "Email already taken"})
     end
@@ -65,13 +65,13 @@ RSpec.describe UserController, type: :request do
 
     context "param password" do
       it "Success" do
-        put "/user/", params: {param: "password", current_val: test_password, new_val: "Jiro123"}, headers: test_auth_header
+        put "/user/", params: {param: "password", current_val: test_password, new_val: "Jiro1234"}, headers: test_auth_header
         expect(response).to have_http_status(:ok)
         expect(JSON.parse(response.body)).to eq({"msg" => "Success"})
       end
 
       it "Failure: Current password incorrect" do
-        put "/user/", params: {param: "password", current_val: "Jiro123", new_val: "Jiro123"}, headers: test_auth_header
+        put "/user/", params: {param: "password", current_val: "Jiro1234", new_val: "Jiro1234"}, headers: test_auth_header
         expect(response).to have_http_status(:bad_request)
         expect(JSON.parse(response.body)).to eq({"msg" => "Current password incorrect"})
       end     

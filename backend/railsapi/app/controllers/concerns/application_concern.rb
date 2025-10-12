@@ -1,5 +1,4 @@
 module ApplicationConcern extend ActiveSupport::Concern
-
   SUCCESS_RESULT = {msg: "Success"}, 200
 
   def register(email, password, name)
@@ -51,5 +50,4 @@ module ApplicationConcern extend ActiveSupport::Concern
       return SUCCESS_RESULT
     end
   end
-
 end
