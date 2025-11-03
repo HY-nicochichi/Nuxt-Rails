@@ -1,5 +1,5 @@
 function getJwt(): string {
-  return localStorage.getItem('JWT') || ''
+  return localStorage.getItem('JWT') ?? ''
 }
 
 function setJwt(jwt: string = ''): void {

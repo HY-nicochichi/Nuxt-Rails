@@ -1,34 +1,59 @@
 class UserController < ApplicationController
   before_action :jwt_protect, except: [:post]
 
+  validate_params_with UserSchema::Post, action: :post
+  validate_params_with UserSchema::Patch, action: :patch
+
   def get
-    return render json: {email: @current_user.email, name: @current_user.name}, status: 200
+    render json: {email: @current_user.email, name: @current_user.name}, status: 200
   end
 
   def post
-    json, status = register(params[:email], params[:password], params[:name])
-    return render json: json, status: status
+    if User.find_by(email: @valid_data[:email])
+      return render json: {msg: "Email already taken"}, status: 409
+    end
+    ActiveRecord::Base.transaction do
+      User.create!(
+        email: @valid_data[:email],
+        pass_enc: User.encrypt_password(@valid_data[:password]),
+        name: @valid_data[:name]
+      )
+    end
+    render json: {msg: "Success"}, status: 201
   end
 
-  def put
-    param = params[:param]
-    current_val = params[:current_val]
-    new_val = params[:new_val]
-    if param == "email"
-      json, status = update_email(current_val, new_val)   
-    elsif param == "password"
-      json, status = update_password(current_val, new_val)  
-    elsif param == "name"
-      json, status = update_name(current_val, new_val)
-    else
-      json, status = {msg: "Param incorrect"}, 400
+  def patch
+    current_val = @valid_data[:current_val]
+    new_val = @valid_data[:new_val]
+    case @valid_data[:param]
+    when "email"
+      if @current_user.email != current_val
+        return render json: {msg: "Invalid current value"}, status: 400
+      elsif User.find_by(email: @valid_data[:new_val])
+        return render json: {msg: "New value already taken"}, status: 409
+      end
+      @current_user.email = new_val
+    when "password"
+      if !@current_user.password_matched?(current_val)
+        return render json: {msg: "Invalid current value"}, status: 400
+      end
+      @current_user.pass_enc = User.encrypt_password(new_val)
+    when "name"
+      if @current_user.name != current_val
+        return render json: {msg: "Invalid current value"}, status: 400
+      end
+      @current_user.name = new_val
     end
-    return render json: json, status: status
+    ActiveRecord::Base.transaction do
+      @current_user.save!
+    end
+    render json: {msg: "Success"}, status: 200
   end
 
   def delete
-    @current_user.destroy
-    json, status = SUCCESS_RESULT
-    return render json: json, status: status
+    ActiveRecord::Base.transaction do
+      @current_user.destroy!
+    end
+    render plain: "", status: 204
   end
 end

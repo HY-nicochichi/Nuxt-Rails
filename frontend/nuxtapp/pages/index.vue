@@ -1,13 +1,7 @@
 <script setup lang="ts">
-  onBeforeMount(() => {
-    document.title = 'Nuxt-Rails'
-  })
+  useHead({title: 'Nuxt-Rails'})
 </script>
 
 <template>
-  <div class="p-3">
-    <h4 class="fw-bolder">
-      Nuxt-Rails Auth App
-    </h4>
-  </div>
+  <h4 class="fw-bolder">Nuxt-Rails Auth App</h4>
 </template>

@@ -2,7 +2,7 @@
   "openapi": "3.0.0",
   "info": {
     "title": "Rails REST-API",
-    "version": "1.0.7"
+    "version": "1.0.8"
   },
   "components": {
     "securitySchemes": {
@@ -57,10 +57,6 @@
                 "schema": {
                   "type": "object",
                   "properties": {
-                    "msg": {
-                      "type": "string",
-                      "example": "Success"
-                    },
                     "access_token": {
                       "type": "string",
                       "example": "Json.Web.Token"
@@ -138,8 +134,8 @@
           }
         },
         "responses": {
-          "200": {
-            "description": "Success",
+          "201": {
+            "description": "Created",
             "content": {
               "application/json": {
                 "schema": {
@@ -156,7 +152,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "User API"
         ],
@@ -221,21 +217,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "properties": {
-                    "msg": {
-                      "type": "string",
-                      "example": "Success"
-                    }
-                  }
-                }
-              }
-            }
+          "204": {
+            "description": "No Content"
           }
         }
       }

@@ -5,6 +5,6 @@ Rails.application.routes.draw do
 
   get    "/user/" => "user#get"
   post   "/user/" => "user#post"
-  put    "/user/" => "user#put"
+  patch  "/user/" => "user#patch"
   delete "/user/" => "user#delete"
 end
