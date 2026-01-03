@@ -12,11 +12,11 @@ STEP1: Prepare ./database.env & ./backend.env
 # ./database.env
 POSTGRES_USER="user"
 POSTGRES_PASSWORD="password"
+POSTGRES_DB="db"
 ```
 ```
 # ./backend.env
 JWT_SECRET_KEY="secret"
-DATABASE_USER="user"
-DATABASE_PASSWORD="password"
+DATABASE_URL="postgresql://user:password@database:5432/db"
 ```
 STEP2: Run `$ docker compose up -d --build`

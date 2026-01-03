@@ -12,7 +12,7 @@ RUN apt install -y --no-install-recommends build-essential libpq-dev libsqlite3-
 
 COPY railsapi/Gemfile railsapi/Gemfile.lock ./
 
-RUN bundle config set --local path 'vendor/bundle' && \
+RUN bundle config set --local path "vendor/bundle" && \
     bundle install
 
 COPY railsapi/ .
