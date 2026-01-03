@@ -1,16 +1,12 @@
 default: &default
-  adapter: postgresql
   encoding: unicode
-  host: database
-  port: 5432
-  username: <%= ENV["DATABASE_USER"] %>
-  password: <%= ENV["DATABASE_PASSWORD"] %>
   pool: 5
 
 development:
   <<: *default
-  database: rails_dev
 
 test:
   <<: *default
-  database: rails_test
+
+production:
+  <<: *default
