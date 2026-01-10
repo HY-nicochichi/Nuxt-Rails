@@ -1,12 +1,20 @@
-default: &default
+base: &base
   encoding: unicode
   pool: 5
+  url: <%= ENV["DATABASE_URL"] %>
 
 development:
-  <<: *default
+  <<: *base
 
 test:
-  <<: *default
+  <<: *base
 
 production:
-  <<: *default
+  primary:
+    <<: *base
+  cache:
+    <<: *base
+  queue:
+    <<: *base
+  cable:
+    <<: *base

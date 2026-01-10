@@ -16,7 +16,7 @@ POSTGRES_DB="db"
 ```
 ```
 # ./backend.env
-JWT_SECRET_KEY="secret"
+SECRET_KEY_BASE="secret"
 DATABASE_URL="postgresql://user:password@database:5432/db"
 ```
 STEP2: Run `$ docker compose up -d --build`
